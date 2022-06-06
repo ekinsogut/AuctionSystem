@@ -1,0 +1,32 @@
+section.top-header
+    .container
+        .row
+            .col-md-4.col-xs-12.col-sm-4
+                .contact-number
+                    i.tf-ion-ios-telephone
+                    span 0535-234-57-17
+            .col-md-4.col-xs-12.col-sm-4
+                // Site Logo
+                .logo.text-center
+                    a(href='/')
+                        svg(width='135px' height='15px' viewBox='0 0 155 29' xmlns:xlink='http://www.w3.org/1999/xlink')
+                            g#Page-1(stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' font-size='40' font-family='Century Gothic')
+                                g#Group(transform='translate(-108.000000, -296.000000)' fill='#000000')
+                                    text#AVIATO
+                                        tspan(x='108.94' y='325') AUCTION
+
+            if isAuthenticated
+                .col-md-4.col-xs-12.col-sm-4
+                    ul.top-menu.text-right.list-inline
+                        li.dropdown.search.dropdown-slide
+                            p.dropdown-toggle(href='#!' data-toggle='dropdown' data-hover='dropdown')
+                                |  Search
+                            ul.dropdown-menu.search-dropdown
+                                li
+                                    form(action='/search' method="POST" name="search")
+                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                        input.form-control(type='search' placeholder='Search...' name='sText' id='searchtext')
+
+                                    include ../includes/search.pug
+                            
+

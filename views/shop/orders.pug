@@ -1,0 +1,47 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.page-header
+        .container
+            .row
+                .col-md-12
+                    .content
+                        h1.page-name MY ORDERS
+                        hr
+    .container
+        .row
+            .col-md-12
+                .dashboard-wrapper.user-dashboard
+
+                    if orders.length > 0
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th Product Image 
+                                        th Product Name 
+                                        th Price
+                                        th Payment
+                                tbody 
+
+                                    each order in orders 
+                                        tr 
+                                            td 
+                                                img(src=`/projectImages/${order.productImg}` width='80')
+                                            td #{order.productName}
+                                            td #{order.productCurrentBid}
+
+                                            if order.isPayment === false
+                                                td
+                                                    a.btn.btn-main.btn-small.btn-round(href=`/orders/${order._id}`) Pay
+                                            else
+                                                td Paid
+
+                    else 
+                        h1 No Orders

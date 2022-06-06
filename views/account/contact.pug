@@ -1,0 +1,59 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+
+    section.page-header
+        .container
+            .row
+                .col-md-12
+                    .content
+                        h1.page-name Contact Us
+
+    section.page-wrapper
+        .contact-section
+            .container
+                .row
+                    .contact-form.col-md-6
+                        form#contact-form(method='post' action='/contact' role='form')
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group
+                                input#email.form-control(type='email' placeholder='Your Email' name='email')
+                            .form-group
+                                input#email.form-control(type='password' placeholder='Your Password' name='password')
+                            .form-group
+                                input#subject.form-control(type='text' placeholder='Subject' name='subject')
+                            .form-group
+                                textarea#message.form-control(rows='6' placeholder='Message' name='message')
+                            #cf-submit
+                                input#contact-submit.btn.btn-transparent(type='submit' value='Submit')
+
+                    .contact-details.col-md-6
+
+                        ul.contact-short-info
+                            li
+                                i.tf-ion-ios-home
+                                span Istanbul Aydin University
+                            li
+                                i.tf-ion-android-phone-portrait
+                                span Phone: 05352345717
+                            li
+                                i.tf-ion-android-globe
+                                span Fax: 05352345717
+                            li
+                                i.tf-ion-android-mail
+                                span Email: ekinsogut@outlook.com
+
+                        .social-icon
+                            ul
+                                li
+                                    a.fb-icon(href='https://www.facebook.com/ekin.sogut.581/')
+                                        i.tf-ion-social-facebook
+                                li
+                                    a(href='https://twitter.com/ekinsogut1')
+                                        i.tf-ion-social-twitter

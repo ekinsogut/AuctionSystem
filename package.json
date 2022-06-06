@@ -1,0 +1,30 @@
+{
+  "name": "GraduationProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cjs-loader": "^0.1.0",
+    "connect-mongodb-session": "^2.4.1",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "csurf": "^1.11.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.5.0",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "nodemon": "^2.0.16",
+    "pug": "^3.0.2"
+  }
+}

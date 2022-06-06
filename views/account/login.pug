@@ -1,0 +1,37 @@
+extends ../layouts/main-layout.pug
+
+block content
+    section.signin-page.account
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+
+                        a.logo(href='/')
+                            |   AUCTION
+
+                        h2.text-center Welcome
+
+                        form.text-left.clearfix(action='/login' method="POST")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group
+                                input.form-control(type='email' placeholder='Email' name="email")
+                            .form-group
+                                input.form-control(type='password' placeholder='Password' name="password")
+                            .text-center
+                            button.btn.btn-main.text-center(type='submit') Login
+
+                        p.mt-20
+                            | New in this site ?
+                            a(href='/register')  Create New Account
+                        
+                        p.mt-20
+                            | Forget your password ?
+                            a(href='/reset-password')  Reset Password
+
+                        hr
+
+                        if errorMessage 
+                            div.alert.alert-warning.alert-common(role='alert')
+                                span
+                                | !{errorMessage}

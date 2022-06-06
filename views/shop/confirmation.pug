@@ -1,0 +1,56 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.page-wrapper.success-msg
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+                        i.tf-ion-android-checkmark-circle
+                        h2.text-center Thank you! For your payment
+
+                        hr
+                        p Your payment to account number #{user.cartNo} has been successfully completed.
+
+                        hr
+
+                        p If you have any problems with the product, you can contact us at #{user.phone}.
+
+                        hr
+
+                        p Or, if you wish, you can send an e-mail by filling out the form on our contact page.
+
+                        a.btn.btn-main.mt-20(href='/contact') Contact Us
+
+                        br
+
+                        a.btn.btn-main.mt-20(href='/') Continue Shopping
+
+    footer.footer.section.text-center
+        .container
+            .row
+                .col-md-12
+                    ul.social-media
+                        li
+                            a(href='https://www.facebook.com/ekin.sogut.581/')
+                            i.tf-ion-social-facebook
+                        li
+                            a(href='https://www.instagram.com/eknsogut/?hl=tr')
+                            i.tf-ion-social-instagram
+                        li
+                            a(href='https://twitter.com/ekinsogut1')
+                            i.tf-ion-social-twitter
+
+                    ul.footer-menu.text-uppercase
+                        li
+                            a(href='/contact') CONTACT
+                        li
+                            a(href='/') SHOP
+                    p.copyright-text
+                    | Designed and Developed by Ekin Söğüt / Mehmet Akif İnan

@@ -1,0 +1,121 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.single-product
+        .container
+            .row.mt-20
+                .col-md-5
+                    .single-product-slider
+                        #carousel-custom.carousel.slide(data-ride='carousel')
+                            .carousel-outer
+                                .carousel-inner
+                                    .item.active
+                                        img(src=`/projectImages/${product.imageUrl}`)
+
+                .col-md-7
+                    .single-product-details
+                        h2 #{product.name}
+                        hr  
+                        p.product-description.mt-20#demo
+
+                        form(action="/create-order" method="POST" name="order")
+                            input(type='hidden' name='productId' value=`${product._id}`)
+                            input(type='hidden' name='product' value=`${product}`)
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+
+                        include ../includes/countDown.pug
+
+                        hr
+                        p.product-price Sale Price: #{product.sale_price} TL
+                        p.product-price Start Bid: #{product.start_bid} TL
+                        p.product-price Current Bid: #{product.current_bid} TL
+
+                        form(action='/cart' method='POST')
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            input(type='hidden' name='productId' value=`${product._id}`)
+                            button(type='sumbit').btn.btn-main.mt-20 Add To Cart
+                        hr
+                .col-md-2
+                    form(action='/bid' method='POST')
+                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                        input(type='hidden' name='productId' value=`${product._id}`)
+                        p.product-price Bidding:
+                        input(type="number" name="current_bid" value=`${product.current_bid}`  min=`${product.current_bid}` max=`${product.current_bid + 50}`)
+                        button(type='sumbit').btn.btn-main.mt-20 OK
+
+            .row
+                .col-xs-12
+                    .tabCommon.mt-20
+                        .tab
+                            ul.nav.nav-tabs
+                                li
+                                    button.tablinks(onclick="openButton(event, 'Details')").btn.btn-main.mt-20 Details
+                                li
+                                    button.tablinks(onclick="openButton(event, 'Reviews')").btn.btn-main.mt-20 Reviews
+                                li
+                                    button.tablinks(onclick="openButton(event, 'AddComment')").btn.btn-main.mt-20 Add Comment
+                        .tab-content.patternbg
+                            #Details.tabcontent
+                                h4 Details
+                                br
+                                p #{product.description}
+                            #Reviews.tabcontent
+                                h4 Reviews
+                                br
+                                if comments.length > 0
+                                    .post-comments
+                                        ul.media-list.comments-list.m-bot-50.clearlist
+
+                                            each comment in comments
+                                                li.media
+                                                    p.pull-left
+                                                        img.media-object.comment-avatar(src=`/projectImages/${comment.userImg}` alt='' width='50' height='50')
+                                                    .media-body
+                                                        .comment-info
+                                                            h4.comment-author
+                                                                h5 #{comment.userName}
+                                                            time(datetime='2013-04-06T13:53') #{comment.date}
+                                                            a.comment-button(href='#!')
+                                                            i.tf-ion-chatbubbles
+                                                        p
+                                                            | #{comment.commentContent}
+                                else 
+                                    p No Comments
+                            #AddComment.tabcontent
+                                h4 Add Comment
+                                br
+                                form.text-left.clearfix(action='/comment' method="POST")
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    input(type='hidden' name='productId' value=`${product._id}`)
+                                    .form-group
+                                        input.form-control(type='text' placeholder='Your Comment' name="commentContent")
+                                    .text-center
+                                    button.btn.btn-main.text-center(type='submit') Add
+                                
+                            script.
+                                function openButton(evt,operationName) {
+
+                                    var i, tabcontent, tablinks;
+
+                                    tabcontent = document.getElementsByClassName("tabcontent");
+
+                                    for (i = 0; i < tabcontent.length; i++) {
+                                        tabcontent[i].style.display = "none";
+                                    }
+
+                                    tablinks = document.getElementsByClassName("tablinks");
+
+                                    for (i = 0; i < tablinks.length; i++) {
+                                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                                    }
+
+                                    document.getElementById(operationName).style.display = "block";
+                                    evt.currentTarget.className += " active";
+
+                                    }

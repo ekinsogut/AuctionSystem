@@ -1,0 +1,59 @@
+section.menu
+    nav.navbar.navigation
+        .container 
+            #navbar.navbar-collapse.collapse.text-center
+
+                ul.nav.navbar-nav
+
+                    li.dropdown
+                        a(href='/') HOMEPAGE
+
+                    if isAuthenticated
+
+                        if isAdmin
+
+                            li.dropdown.dropdown-slide
+                                a.dropdown-toggle(href="#" data-toggle='dropdown' data-hover='dropdown' data-delay='350' role='button' aria-haspopup='true' aria-expanded='false') OPERATIONS 
+                                    span.tf-ion-ios-arrow-down
+                                .dropdown-menu
+                                    .row
+                                        .col-lg-4.col-md-6.mb-sm-3
+                                            ul
+                                                li.dropdown-header Categories
+                                                li.divider(role='separator')
+                                                li
+                                                    a(href='/admin/categories') Dashboard
+                                        .col-lg-4.col-md-6.mb-sm-3
+                                            ul
+                                                li.dropdown-header Products
+                                                li.divider(role='seperator')
+                                                li
+                                                    a(href='/admin/products') Dashboard
+                                        .col-lg-4.col-md-6.mb-sm-3
+                                            ul
+                                                li.dropdown-header Orders
+                                                li.divider(role='seperator')
+                                                li
+                                                    a(href='/admin/my_orders') Dashboard
+                        li.dropdown
+                            a(href='/orders') MY ORDERS
+                        li.dropdown
+                            a(href='/products') SHOP
+                        li.dropdown
+                            a(href='/cart') CART
+                        li.dropdown
+                            a(href='/profile') PROFILE
+                        li.dropdown
+                            a(href='/logout') LOGOUT
+                    else
+                        li.dropdown
+                            a(href='/login') LOGIN
+                        li.dropdown
+                            a(href='/register') REGISTER
+                        li.dropdown
+                            a(href='/contact') CONTACT US
+
+
+
+
+

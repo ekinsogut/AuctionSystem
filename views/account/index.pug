@@ -1,0 +1,79 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    .hero-slider
+
+        .slider-item.th-fullpage.hero-area(style='background-image: url(images/slider/slider-one.jpg);')
+            .container
+                .row
+                    .col-lg-8.text-center
+                        p(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.1') Auction site
+                        h1(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.5')
+                            | Simple.
+                        a.btn(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.8' href='/products') Shop Now
+
+        .slider-item.th-fullpage.hero-area(style='background-image: url(images/slider/slider-three.jpg);')
+            .container
+                .row
+                    .col-lg-8.text-right
+                        p(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.1') Buy
+                        h1(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.5')
+                            | Bid and
+                            br
+                            |  win.
+                        a.btn(data-duration-in='.3' data-animation-in='fadeInUp' data-delay-in='.8' href='/products') Shop Now
+
+
+    if categories.length > 0
+        - const array = [];
+            
+            section.product-category.section
+                .container
+                    .row
+                        .col-md-12
+                            .title.text-center
+                                h2 Product Category
+                        
+                        each category in categories
+                            - array.push(category)
+
+
+                        each item in array  
+
+                            .col-md-6
+                                .category-box
+                                    a(href=`/categories/${item._id}`)
+                                        img(src=`/projectImages/${item.imageUrl}` alt='')
+                                        .content
+                                            h3 #{item.name}
+                                            p #{item.description}
+
+    footer.footer.section.text-center
+        .container
+            .row
+                .col-md-12
+                    ul.social-media
+                        li
+                            a(href='https://www.instagram.com/eknsogut/?hl=tr')
+                            i.tf-ion-social-instagram
+                        li
+                            a(href='https://twitter.com/ekinsogut1')
+                            i.tf-ion-social-twitter
+                    p.copyright-text
+                    | Designed and Developed by Ekin Söğüt
+
+
+    
+
+
+    
+
+
+
+

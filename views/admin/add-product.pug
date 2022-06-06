@@ -1,0 +1,44 @@
+extends ../layouts/main-layout.pug
+
+block content
+    section.signin-page.account
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+
+                        a.logo(href='/')
+                            |   AUCTION
+
+                        h2.text-center Add Product
+
+                        form.text-left.clearfix(action='/admin/add-product' method="POST" enctype="multipart/form-data")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group
+                                input.form-control(type='text' placeholder='Product Name' name="name")                   
+                            .form-group
+                                textarea.form-control(placeholder='Product Description' name="description")
+                            .form-group
+                                input.form-control(type='number' placeholder='Start Bid' name="start_bid")
+                            .form-group
+                                input.form-control(type='number' placeholder='Sale Price' name="sale_price")
+                            .form-group
+                                input.form-control(type='text' placeholder='Last Date - Ex: "April 19, 2021 00:00:00"' name="last_date")
+                            .form-group
+                                input.form-control-file(type='file' name="image")
+                            .form-group 
+                                each category in categories ? categories : []
+                                    
+                                    input.form-control(type="checkbox" name="categoryids" value=`${category._id}` checked=category.selected)
+                                    | #{category.name}
+                                    br
+                            hr
+                            .text-center
+                            button.btn.btn-main.text-center(type='submit') Add
+
+                        hr
+
+                        if errorMessage 
+                            div.alert.alert-warning.alert-common(role='alert')
+                                span
+                                | !{errorMessage}

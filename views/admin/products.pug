@@ -1,0 +1,96 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+
+    section.page-header
+        .container
+            .row
+            .col-md-12
+                .content
+                    h1.page-name ADMIN PRODUCTS
+                    hr
+                    a.btn.btn-main.btn-small.btn-round(href='/admin/add-product') Add Product
+                    hr
+
+                    if (action !== 'undefined' && action === 'create')
+                        div.alert.alert-success.alert-common(role='alert')
+                            i.tf-ion-thumbsup
+                            span Well done!
+                            |   The product has been created
+                    
+                    if (action !== 'undefined' && action === 'change')
+                        div.alert.alert-info.alert-common(role='alert')
+                            i.tf-ion-thumbsup
+                            span Well done!
+                            |   The product has been changed
+
+                    if (action !== 'undefined' && action === 'delete')
+                        div.alert.alert-danger.alert-common(role='alert') 
+                            i.tf-ion-close-circled
+                            span Well done!
+                            |   The product has been deleted
+
+                    if (action !== 'undefined' && action === 'edit')
+                        div.alert.alert-warning.alert-common(role='alert') 
+                            i.tf-ion-alert-circled
+                            span Well done!
+                            |   The product has been updated
+
+    .container
+        .row
+            .col-md-12
+                .dashboard-wrapper.user-dashboard
+
+                    if products.length > 0
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th Product Image
+                                        th Product Name
+                                        th Start Bid
+                                        th Sale Price
+                                        th Current Bid
+                                        th isSold
+                                        th isActive
+                                        th Edit
+                                        th Delete
+                                tbody
+
+                                    each product in products
+                                        tr
+                                            td
+                                                img(src=`/projectImages/${product.imageUrl}` width='80')
+                                            td #{product.name}
+                                            td #{product.start_bid}
+                                            td #{product.sale_price}
+                                            td #{product.current_bid}
+                                            
+                                            if product.isSold === true 
+                                                td Sold.
+                                            else 
+                                                td Not Sold.
+
+                                            if product.isActive !== null
+                                                td 
+                                                    form(action='/admin/isActive' method='POST')
+                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                        input(type='hidden' name='productid' value=`${product._id}`)
+                                                        button(type='submit').btn.btn-main.btn-small.btn-round #{product.isActive}
+
+                                            td
+                                                a.btn.btn-main.btn-small.btn-round(href=`/admin/products/${product._id}`) Edit
+                                            td
+                                                form(action='/admin/delete-product' method='POST')
+                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                    input(type='hidden' name='productid' value=`${product._id}`)
+                                                    button(type='submit').btn.btn-main.btn-small.btn-round Delete
+
+                    else 
+                        h1 No Products

@@ -1,0 +1,47 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.user-dashboard.page-wrapper
+        .container
+            .row
+                .col-md-12
+                    .dashboard-wrapper.dashboard-user-profile
+                        .media
+                            .pull-left.text-center(href='#!')
+                                img.media-object.user-img(src=`/projectImages/${user.imageUrl}`)
+                            .media-body
+                                ul.user-profile-list
+                                    li
+                                    span Name:
+                                    | #{user.name}
+                                    li
+                                    span Surname:
+                                    | #{user.surname}
+                                    li
+                                    span Date:
+                                    | #{user.birth.getFullYear()}
+                                    li
+                                    span Country:
+                                    | #{user.country}
+                                    li
+                                    span Address:
+                                    | #{user.address}
+                                    li
+                                    span Email:
+                                    | #{user.email}
+                                    li
+                                    span Phone:
+                                    | #{user.phone}
+                                    li
+                                    span IBAN:
+                                    | #{user.cartNo}
+                                    hr
+                                    li 
+                                        a.btn.btn-main.btn-small.btn-round(href=`/admin/my_orders`) Back
+                                    

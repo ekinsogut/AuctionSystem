@@ -1,0 +1,56 @@
+extends ../layouts/main-layout.pug
+
+block content
+    section.signin-page.account
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+
+                        a.logo(href='/')
+                            |   AUCTION
+
+                        h2.text-center Create Your Account
+
+                        form.text-left.clearfix(action='/register' method="POST" enctype="multipart/form-data")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group
+                                input.form-control(type='text' placeholder='First Name' name="name")
+                            .form-group
+                                input.form-control(type='text' placeholder='Last Name' name="surname")
+                            .form-group 
+                                input.form-control(type='date' name="birth")
+                            .form-group
+                                input.form-control(type='email' placeholder='Email' name="email")
+                            .form-group
+                                input.form-control(type='password' placeholder='Password' name="password")
+                            .form-group
+                                input.form-control(type='text' placeholder='Phone' name="phone")
+                            .form-group
+                                input.form-control(type='text' placeholder='Country' name="country")
+                            .form-group
+                                input.form-control(type='text' placeholder='Address' name="address")
+                            .form-group
+                                input.form-control(type='text' placeholder='IBAN' name="cartNo")
+                            .form-group
+                                input.form-control(type='file' name="image")
+                            .text-center
+                            button.btn.btn-main.text-center(type='submit') Register
+
+                        p.mt-20
+                            | Already hava an account ?
+                            a(href='/login')  Login
+
+                        p
+                            a(href='/reset-password')  Forgot your password?
+                        
+                        hr
+
+                        if errorMessage 
+                            div.alert.alert-warning.alert-common(role='alert')
+                                span
+                                | !{errorMessage}
+                        
+
+
+

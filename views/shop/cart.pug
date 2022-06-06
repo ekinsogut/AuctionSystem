@@ -1,0 +1,69 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.page-header
+        .container
+            .row
+                .col-md-12
+                    .content
+                        h1.page-name CART
+    .page-wrapper
+        .cart.shopping
+            .container
+                .row
+                    .col-md-8.col-md-offset-2
+                        .block
+                            .product-list
+                                if products.length > 0
+                                    table.table
+                                        thead
+                                            tr
+                                                th Image
+                                                th Item Name 
+                                                th Start Bid
+                                                th Current Bid 
+                                                th Sale Price
+                                                th isSold
+                                                th Detail
+                                                th Delete
+                                        tbody
+                                            each product in products 
+                                                tr 
+                                                    td
+                                                        .product-info
+                                                            img(width='80' src=`/projectImages/${product.productId.imageUrl}` alt='')
+                                                    td
+                                                        |   #{product.productId.name}
+                                                    td
+                                                        |   #{product.productId.start_bid} 
+                                                    td
+                                                        |   #{product.productId.current_bid}
+                                                    td 
+                                                        |   #{product.productId.sale_price}
+
+                                                    if product.productId.isSold === true
+                                                        td Sold.
+                                                    else
+                                                        td Not Sold.
+                                                    
+                                                    if product.productId.isSold === true 
+                                                        td No Product 
+                                                    else 
+                                                        td
+                                                            a.btn.btn-main.btn-small.btn-round(href=`/products/${product.productId._id}`) Detail
+                                                    td 
+                                                        form(action='/delete-cartitem' method='POST')
+                                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                            input(type='hidden' name='productid' value=`${product.productId._id}`)
+                                                            button(type='submit').btn.btn-main.btn-small.btn-round Delete
+                                else
+                                    h1 No Products
+
+
+

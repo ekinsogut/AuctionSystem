@@ -1,0 +1,75 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+    section.page-header
+        .container
+            .row
+                .col-md-12
+                    .content
+                        h1.page-name Checkout
+
+    .page-wrapper
+        .checkout.shopping
+            .container
+                .row
+                    .col-md-8
+                        .block.billing-details
+                            h4.widget-title Billing Details
+                            form.checkout-form(action='/orders' method="POST")
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                input(type="hidden" name="orderid" value=`${order._id}`)
+                                input(type="hidden" name="selleruserid" value=`${order.sellerUserId}`)
+                                .form-group
+                                    label(for='full_name') Full Name :
+                                    input#full_name.form-control(type='text' name='name')
+                                .form-group
+                                    label(for='user_email') Email :
+                                    input#full_name.form-control(type='email' name='email')
+                                .form-group
+                                    label(for='user_address') Address :
+                                    input#user_address.form-control(type='text'  name='address')
+                                .checkout-country-code.clearfix
+                                    .form-group
+                                        label(for='user_post_code') Zip Code :
+                                        input#user_post_code.form-control(type='text' name='zipcode')
+                                    .form-group
+                                        label(for='user_city') City :
+                                        input#user_city.form-control(type='text' name='city')
+                                .form-group
+                                    label(for='user_country') Country :
+                                    input#user_country.form-control(type='text' name='country')
+                                .form-group
+                                    label(for='card-number')
+                                        | Card Number 
+                                        span.required :
+                                    input#card-number.form-control(type='text' placeholder='•••• •••• •••• ••••' name='cartNumber')
+                                .form-group.half-width.padding-right
+                                    label(for='card-expiry')
+                                        | Expiry (MM/YY) 
+                                        span.required :
+                                    input#card-expiry.form-control(type='text' placeholder='MM / YY' name='expiry')
+                                .form-group.half-width.padding-left
+                                    label(for='card-cvc')
+                                        | Card Code 
+                                        span.required :
+                                    input#card-cvc.form-control(type='text' maxlength='4' placeholder='CVC' name='cvc')
+                                button(type='submit').btn.btn-main.mt-20 Pay
+                    .col-md-4
+                        .product-checkout-details
+                            .block
+                                h4.widget-title Order Summary
+                                .media.product-card
+                                    img.media-object(src=`/projectImages/${order.productImg}` alt='Image')
+                                    .media-body
+                                    h4.media-heading
+                                        | #{order.productName}
+                                    br
+                                    .summary-total
+                                        span Price
+                                        span #{order.productCurrentBid}

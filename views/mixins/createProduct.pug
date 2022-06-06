@@ -1,0 +1,20 @@
+mixin createProduct(product)
+    .col-md-3
+        .product-item
+            .product-thumb
+                img.img-responsive(src=`/projectImages/${product.imageUrl}`)
+                .preview-meta
+                    ul
+                        li
+                            form(action='/cart' method='POST')
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                input(type='hidden' name='productId' value=`${product._id}`)
+                                button(type='sumbit')
+                                    i.tf-ion-android-cart
+            .product-content
+                h4
+                    a(href=`/products/${product._id}`) #{product.name}
+                    hr
+                    p.price Sales Price: #{product.sale_price} TL
+                    p.price Current Bid: #{product.current_bid} TL
+

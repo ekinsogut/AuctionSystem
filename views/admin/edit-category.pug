@@ -1,0 +1,30 @@
+extends ../layouts/main-layout.pug
+
+block content
+    section.signin-page.account
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+
+                        a.logo(href='/')
+                            |   AUCTION
+
+                        h2.text-center Edit Category
+
+                        form.text-left.clearfix(action='/admin/categories' method="POST" enctype="multipart/form-data")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            input(type="hidden" name="id" value=`${category._id}`)
+
+                            .text-center
+                                .form-group
+                                    img(src=`/projectImages/${category.imageUrl}` width="150" height="150" )
+                                    hr
+                                    input#image(type="file" name="image")
+                                
+                            .form-group
+                                input.form-control(type='text' placeholder='Category Name' name="name" value=`${category.name}`)
+                            .form-group
+                                input.form-control(type='text' placeholder='Category Description' name="description" value=`${category.description}`)
+                            .text-center
+                            button.btn.btn-main.text-center(type='submit') Edit

@@ -1,0 +1,28 @@
+Açık Arttırma Yönetim Sistemi
+-------------------------------------------
+Projeyi çalıştırmadan önce aşağıda ki komutların uygulanması gerekmektedir.
+
+1. Projenin çalışması için node.js kurulumu yapılması gerekmektedir.
+
+2. Projenin bulunduğu dizin içerisine gelip terminal üzerinden 'npm install' komutu çalıştırılmalıdır.
+Böylelikle proje içerisinde kullanılan paketlerin yükleme işlemi otomatik olarak gerçekleşecektir.
+
+2.1 Versiyon farkından dolayı hata alınır ise 'npm init' komutu ile yeni bir pakage.json dosyası oluşturup sonrasında projede kullanılan paketleri baştan yükleyebilirsiniz.
+(Örn: npm install --save express)
+
+3. MongoDB veri tabanı bağlantı ve e-mail işlemleri bilgileri .env uzantılı dosya içerisindedir. Bu bilgilerin girilmesi gerekmektedir.
+ATLAS_URI=(Mongoose veri tabanı bağlantı linki Örn: mongodb+srv://ekinsogut:<password>@cluster0.sphea.mongodb.net/<DBName>?retryWrites=true&w=majority)
+USER=(Site yöneticisinin g-mail adresi Örn: ekinsogut@outlook.com)
+PASSWORD=(Site yöneticisinin g-mail şifresi Örn: 123456789)
+
+4. Projeyi çalıştırmak için dizin içerisine gelip terminal üzerinden 'node app.js' komutu çalıştırılmalıdır.
+'Database connection succeeded.' uyarısı görüldüğün de veri tabanı bağlantısı başarıyla gerçekleşmiş demektir.
+Eğer node paketleri ile ilgili bir hata alınırsa 2.1'de ki adımları uygulayınız.
+
+5.Kullanılan tarayıcı üzerinden http://localhost:3000/ adresine bağlanılarak Web sitesine giriş yapılır.
+-------------------------------------------
+Ekin Söğüt
+
+
+
+

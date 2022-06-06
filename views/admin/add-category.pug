@@ -1,0 +1,32 @@
+extends ../layouts/main-layout.pug
+
+block content
+    section.signin-page.account
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    .block.text-center
+
+                        a.logo(href='/')
+                            |   AUCTION
+
+                        h2.text-center Add Category
+
+                        form.text-left.clearfix(action='/admin/add-category' method="POST" enctype="multipart/form-data")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            .form-group
+                                input.form-control(type='text' placeholder='Category Name' name="name")
+                            .form-group
+                                input.form-control(type='text' placeholder='Category Description' name="description")
+                            .form-group
+                                input.form-control-file(type='file' name="image")
+
+                            .text-center
+                            button.btn.btn-main.text-center(type='submit') Add
+                            
+                            hr
+
+                            if errorMessage 
+                                div.alert.alert-warning.alert-common(role='alert')
+                                    span
+                                    | !{errorMessage}

@@ -1,0 +1,68 @@
+extends ../layouts/main-layout.pug
+
+block main 
+    include ../includes/main.pug
+
+block navbar
+    include ../includes/navbar.pug
+
+block content
+
+    section.page-header
+        .container
+            .row
+            .col-md-12
+                .content
+                    h1.page-name ADMIN CATEGORIES
+                    hr
+                    a.btn.btn-main.btn-small.btn-round(href='/admin/add-category') Add Category
+                    hr
+
+                    if (action !== 'undefined' && action === 'create')
+                        div.alert.alert-success.alert-common(role='alert')
+                            i.tf-ion-thumbsup
+                            span Well done!
+                            |   The category has been created
+
+                    if (action !== 'undefined' && action === 'delete')
+                        div.alert.alert-danger.alert-common(role='alert') 
+                            i.tf-ion-close-circled
+                            span Well done!
+                            |   The category has been deleted
+
+                    if (action !== 'undefined' && action === 'edit')
+                        div.alert.alert-warning.alert-common(role='alert') 
+                            i.tf-ion-alert-circled
+                            span Well done!
+                            |   The category has been updated
+
+    .container
+        .row
+            .col-md-12
+                .dashboard-wrapper.user-dashboard
+
+                    if categories.length > 0
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th Category Name
+                                        th Category Description
+                                        th Edit
+                                        th Delete
+                                tbody
+
+                                    each category in categories
+                                        tr
+                                            td #{category.name}
+                                            td #{category.description}
+                                            td
+                                                a.btn.btn-main.btn-small.btn-round(href=`/admin/categories/${category._id}`) Edit
+                                            td
+                                                form(action='/admin/delete-category' method='POST')
+                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                    input(type='hidden' name='categoryid' value=`${category._id}`)
+                                                    button(type='submit').btn.btn-main.btn-small.btn-round Delete
+
+                    else 
+                        h1 No Categories
